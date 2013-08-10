@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 
 app.get('/image', function (req, res) {
     if(lastPng) {
-        console.log('has last png');
+        //console.log('has last png');
         res.writeHead(200, {'Content-Type:': 'image/png' });
         res.end(lastPng);
     }
@@ -36,7 +36,6 @@ client.after(2000, function () {
         var filename = new Date() * 1 + '.png';
         fs.open(filename, "wx", function (err, fd) {
             fs.write(fd, pngBuffer, 0, pngBuffer.length, null, function () {
-                console.log('Written Data to ' + filename);
                 fs.close(fd, function () {
                     scan(filename);
 
@@ -59,6 +58,10 @@ client.after(2000, function () {
  this.land();
  });
  */
+
+var takeoff = function() { client.takeoff(); };
+var land = function() { client.land(); };
+
 var scanning = false;
 var scan = function (filename) {
     if(!scanning) {
@@ -67,10 +70,13 @@ var scan = function (filename) {
             //nodecr.process(lastPng, function(err, text)
         {
             if(err) {
-                console.error(err);
+            //    console.error(err);
             } else {
                 var tidiedUp = text.replace("0", "O").replace(/\W/g, "");
-                console.log("OCR Text: " + tidiedUp);
+               // if(tidiedUp == "STOP")
+                //{
+                   console.log(tidiedUp);
+               // }
             }
         });
         scanning = false;
