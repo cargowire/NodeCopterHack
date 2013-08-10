@@ -90,7 +90,7 @@ var doAction = function (command) {
                     'PARTY': function () {
                         client.animateLeds('redSnake', 5, 5);
                         client.clockwise(2);
-                        client.animate('doublePhiThetaMixed', 5000).after(6000, function(){client.stop();});
+                        client.animate('doublePhiThetaMixed', 5000);
                     },
                     'FLIP': function () {
                         client.animate('flipBehind', 2000);
