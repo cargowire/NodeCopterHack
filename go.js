@@ -1,6 +1,7 @@
 var express = require('express');
 var engines = require('consolidate');
 var nodecr = require('nodecr');
+var drone = require('dronestream');
 var fs = require('fs');
 var app = express();
 
@@ -19,6 +20,7 @@ app.get('/image', function(req, res)
 {
   if(lastPng)
   {
+    console.log('has last png');
     res.writeHead(200, {'Content-Type:': 'image/png' });
     res.end(lastPng);
   }
@@ -26,19 +28,21 @@ app.get('/image', function(req, res)
 
 var arDrone = require('ar-drone');
 var client = arDrone.createClient();
+var pngStream;
 
 //client.takeoff();
-/*client.after(5000, function()
+client.after(2000, function()
 {
-  var pngEncoder = client.getPngStream();
-  pngEncoder
+  pngStream = client.getPngStream();
+  pngStream
   .on('error', console.log)
-  .on('data', function(pngBugger)
-  {
+  .on('data', function(pngBuffer)
+  {;
     lastPng = pngBuffer;
+    scan();
   });
 });
-*/
+
 /*client
   .after(5000, function() {
     this.clockwise(0.5);
@@ -51,15 +55,25 @@ var client = arDrone.createClient();
     this.land();
   });
 */
-
-nodecr.process(__dirname + '/stop.png', function(err, text)
+var scanning = false;
+var scan = function()
 {
-  if(err)
+if(!scanning)
+{
+  scanning = true;
+  nodecr.process(__dirname + '/stop.png', function(err, text)
+  //nodecr.process(lastPng, function(err, text)
   {
-     console.error(err);
-  }else{
-     console.log("OCR Text: " + text);
-  }
-});
+      if(err)
+      {
+         console.error(err);
+      }else{
+         var tidiedUp = text.replace("0","O").replace(/\W/g, "");
+         console.log("OCR Text: " + tidiedUp);
+      }
+  });
+  scanning = false;
+}
+};
 
-//app.listen(8080);
+app.listen(8080);
