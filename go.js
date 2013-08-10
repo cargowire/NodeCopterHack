@@ -22,9 +22,9 @@ app.get('/image', function (req, res) {
     }
 });
 
-app.get('/land', function(req, res) {
-  client.land();
-  res.render('index');
+app.get('/land', function (req, res) {
+    client.land();
+    res.render('index');
 });
 
 var arDrone = require('ar-drone');
@@ -79,25 +79,62 @@ var scan = function (filename) {
 app.listen(8076);
 
 var doAction = function (command) {
-console.log("COMMAND: " + command);
-    var commands = {
-        'LAND': function () {
-            client.land();
-        },
-        'TAKEOFF': function () {
-            client.takeoff();
-        },
-	'DANCE': function()
-        {
-            client.animateLeds('redSnake', 5, 5);
+    findCommand(command, function (res) {
+            if(res) {
+                console.log("COMMAND: " + res);
+                var commands = {
+                    'LAND': function () {
+                        client.land();
+                    },
+                    'TAKEOFF': function () {
+                        client.takeoff();
+                    },
+                    'DANCE': function () {
+                        client.animateLeds('redSnake', 5, 5);
+                    }
+                }
+
+                var upper = command.toUpperCase();
+                if(typeof commands[upper] == 'function') {
+                    commands[upper]();
+                } else {
+                    console.log("BAD Command: " + command);
+                }
+            } else {
+                console.log("BAD Command: " + command);
+            }
         }
-    }
 
-    var upper = command.toUpperCase();
-    if(typeof commands[upper] == 'function') {
-        commands[upper]();
-    }
+    );
+};
+var findCommand = function (command, callback) {
+    nn = require('nearest-neighbor');
+    var items = [
+        { name: "LAND"},
+        { name: "TAKE OFF"},
+        { name: "UP"},
+        { name: "DOWN"},
+        { name: "LEFT"},
+        { name: "RIGHT"},
+        { name: "DANCE"}
+    ];
 
+    var query = { name: command};
+
+    var fields = [
+        { name: "name", measure: nn.comparisonMethods.word }
+    ];
+
+    nn.findMostSimilar(query, items, fields, function (nearestNeighbor, probability) {
+        console.log(query);
+        console.log(nearestNeighbor);
+        console.log(probability);
+        if(probability > 0.6) {
+            callback(nearestNeighbor.name);
+        } else {
+            callback('');
+        }
+    });
 }
-//takeoff();
+
 
