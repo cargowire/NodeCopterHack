@@ -22,6 +22,11 @@ app.get('/image', function (req, res) {
     }
 });
 
+app.get('/land', function(req, res) {
+  client.land();
+  res.render('index');
+});
+
 var arDrone = require('ar-drone');
 var client = arDrone.createClient();
 var pngStream;
@@ -91,5 +96,4 @@ console.log("COMMAND: " + command);
 
 }
 takeoff();
-
 
