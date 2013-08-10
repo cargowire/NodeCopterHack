@@ -81,11 +81,11 @@ var doAction = function (command) {
                     'LAND': function () {
                         client.land();
                     },
-                    'TAKEOFF': client.takeoff,
-                    'TAKE OFF': client.takeoff,
-                    'DANCE': function () {
+                    'TAKEOFF': function() { client.takeoff(); },
+                    'TAKE OFF': function() { client.takeoff(); },
+                    'PARTY': function () {
                         client.animateLeds('redSnake', 5, 5);
-                        client.rotate(20);
+                        client.clockwise(5);
                     }
                 }
 
@@ -111,7 +111,7 @@ var findCommand = function (command, callback) {
         { name: "DOWN"},
         { name: "LEFT"},
         { name: "RIGHT"},
-        { name: "DANCE"}
+        { name: "PARTY"}
     ];
 
     var query = { name: command};
