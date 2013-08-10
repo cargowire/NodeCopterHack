@@ -76,24 +76,57 @@ app.listen(8076);
 var doAction = function (command) {
     findCommand(command, function (res) {
             if(res) {
-               // console.log("COMMAND: " + res);
+                // console.log("COMMAND: " + res);
                 var commands = {
                     'LAND': function () {
                         client.land();
                     },
-                    'TAKEOFF': function() { client.takeoff(); },
-                    'TAKE OFF': function() { client.takeoff(); },
+                    'TAKEOFF': function () {
+                        client.takeoff();
+                    },
+                    'TAKE OFF': function () {
+                        client.takeoff();
+                    },
                     'PARTY': function () {
                         client.animateLeds('redSnake', 5, 5);
                         client.clockwise(5);
+                        client.animate('thetaDance', 5000);
+                    },
+                    'FLIP': function () {
+                        client.animate('flipBehind', 2000);
+                    },
+
+                    'LEFT': function () {
+                        client.left(0.5).after(1000, function () {
+                            client.stop();
+                        });
+                    },
+
+                    'UP': function () {
+                        client.up(0.5).after(1000, function () {
+                            client.stop();
+                        });
+                    },
+
+                    'DOWN': function () {
+                        client.down(0.5).after(1000, function () {
+                            client.stop();
+                        });
+                    },
+
+                    'RIGHT': function () {
+                        client.right(0.5).after(1000, function () {
+                            client.stop();
+                        });
                     }
+
                 }
 
                 var upper = command.toUpperCase();
                 if(typeof commands[upper] == 'function') {
                     commands[upper]();
                 } else {
-                   // console.log("BAD Command: " + command);
+                    // console.log("BAD Command: " + command);
                 }
             } else {
                 //console.log("BAD Command: " + command);
@@ -111,7 +144,8 @@ var findCommand = function (command, callback) {
         { name: "DOWN"},
         { name: "LEFT"},
         { name: "RIGHT"},
-        { name: "PARTY"}
+        { name: "PARTY"},
+        { name: "FLIP"}
     ];
 
     var query = { name: command};
@@ -123,7 +157,7 @@ var findCommand = function (command, callback) {
     nn.findMostSimilar(query, items, fields, function (nearestNeighbor, probability) {
         //console.log(query);
         //console.log(nearestNeighbor);
-       //console.log(probability);
+        //console.log(probability);
         if(probability > 0.4) {
             callback(nearestNeighbor.name);
         } else {

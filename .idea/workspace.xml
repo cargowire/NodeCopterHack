@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nearest.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/go.js" afterPath="$PROJECT_DIR$/go.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NodeCopterHack.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376143309879" ignored="false" />
-    <file path="/go.js" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376143525720" ignored="false" />
+    <file path="/Dummy.txt" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376145571388" ignored="false" />
+    <file path="/go.js" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376145788053" ignored="false" />
     <file path="/nearest.js" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376142921730" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +32,7 @@
       <file leaf-file-name="go.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/go.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="2" selection-start="2594" selection-end="2594" vertical-scroll-proportion="0.34051725">
+            <state line="96" column="22" selection-start="2682" selection-end="2682" vertical-scroll-proportion="0.41379312">
               <folding />
             </state>
           </provider>
@@ -103,7 +102,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -124,14 +122,15 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="Template Data Languages" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
@@ -245,6 +244,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nearest.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="0" selection-end="465" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nearest.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="465" vertical-scroll-proportion="0.0">
           <folding />
         </state>
@@ -266,7 +279,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/go.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="2" selection-start="2594" selection-end="2594" vertical-scroll-proportion="0.34051725">
+        <state line="96" column="22" selection-start="2682" selection-end="2682" vertical-scroll-proportion="0.41379312">
           <folding />
         </state>
       </provider>
