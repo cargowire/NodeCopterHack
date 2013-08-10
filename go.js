@@ -21,18 +21,24 @@ app.get('/image', function (req, res) {
         res.end(lastPng);
     }
 });
-
+var lastCommand = "";
 app.get('/land', function (req, res) {
     client.land();
     res.render('index');
+    lastCommand = "LAND";
+});
+
+app.get('/takeoff', function (req, res) {
+    takeoff();
+    res.render('index');
+    lastCommand = "TAKEOFF";
 });
 
 var arDrone = require('ar-drone');
 var client = arDrone.createClient();
 var pngStream;
+client.disableEmergency();
 
-//client.takeoff();
-client.after(2000, function () {
     pngStream = client.getPngStream();
     pngStream.on('error', console.log).on('data', function (pngBuffer) {
         lastPng = pngBuffer;
@@ -47,7 +53,6 @@ client.after(2000, function () {
         });
 
     });
-});
 
 var takeoff = function () {
     client.takeoff();
@@ -73,6 +78,7 @@ var scan = function (filename) {
 
 app.listen(8076);
 
+var lastRun = new Date() - 5000;
 var doAction = function (command) {
     findCommand(command, function (res) {
             if(res) {
@@ -80,17 +86,22 @@ var doAction = function (command) {
                 var commands = {
                     'LAND': function () {
                         client.land();
+                        isFlying = false;
                     },
                     'TAKEOFF': function () {
-                        client.takeoff();
+
+                        lastRun = new Date() + 10000;
+                        takeoff();
+
                     },
                     'TAKE OFF': function () {
-                        client.takeoff();
+                        lastRun = new Date() + 10000;
+                        takeoff();
                     },
                     'PARTY': function () {
                         client.animateLeds('redSnake', 5, 5);
-                        client.clockwise(2);
-                        client.animate('doublePhiThetaMixed', 5000);
+                        //client.clockwise(2);
+                        client.animate('doublePhiThetaMixed', 5);
                     },
                     'FLIP': function () {
                         client.animate('flipBehind', 2000);
@@ -124,7 +135,23 @@ var doAction = function (command) {
 
                 var upper = command.toUpperCase();
                 if(typeof commands[upper] == 'function') {
-                    commands[upper]();
+                    var delta = new Date() - lastRun;
+
+                    if(!lastRun || delta > 5000){
+                        console.log(lastCommand);
+                        if(lastCommand != upper.replace(" ", ""))
+                        {
+                            console.log('Running: ' + upper + 'Delta:'+ delta);
+                            commands[upper]();
+                            lastRun = new Date();
+                            lastCommand = upper;
+                        }else
+                        {
+                            console.log('dup command');
+                        }
+                    }else{
+                        console.log('Too Soon: ' + delta);
+                    }
                 } else {
                     // console.log("BAD Command: " + command);
                 }
