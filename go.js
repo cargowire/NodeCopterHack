@@ -64,12 +64,7 @@ var scan = function (filename) {
                 //    console.error(err);
             } else {
                 var tidiedUp = text.replace("0", "O").replace(/\W/g, "");
-                // if(tidiedUp == "STOP")
-                //{
-                console.log(tidiedUp);
                 doAction(tidiedUp);
-
-                // }
             }
         });
         scanning = false;
@@ -81,16 +76,16 @@ app.listen(8076);
 var doAction = function (command) {
     findCommand(command, function (res) {
             if(res) {
-                console.log("COMMAND: " + res);
+               // console.log("COMMAND: " + res);
                 var commands = {
                     'LAND': function () {
                         client.land();
                     },
-                    'TAKEOFF': function () {
-                        client.takeoff();
-                    },
+                    'TAKEOFF': client.takeoff,
+                    'TAKE OFF': client.takeoff,
                     'DANCE': function () {
                         client.animateLeds('redSnake', 5, 5);
+                        client.rotate(20);
                     }
                 }
 
@@ -98,10 +93,10 @@ var doAction = function (command) {
                 if(typeof commands[upper] == 'function') {
                     commands[upper]();
                 } else {
-                    console.log("BAD Command: " + command);
+                   // console.log("BAD Command: " + command);
                 }
             } else {
-                console.log("BAD Command: " + command);
+                //console.log("BAD Command: " + command);
             }
         }
 
@@ -110,8 +105,8 @@ var doAction = function (command) {
 var findCommand = function (command, callback) {
     nn = require('nearest-neighbor');
     var items = [
-        { name: "LAND"},
         { name: "TAKE OFF"},
+        { name: "LAND"},
         { name: "UP"},
         { name: "DOWN"},
         { name: "LEFT"},
@@ -126,10 +121,10 @@ var findCommand = function (command, callback) {
     ];
 
     nn.findMostSimilar(query, items, fields, function (nearestNeighbor, probability) {
-        console.log(query);
-        console.log(nearestNeighbor);
-        console.log(probability);
-        if(probability > 0.6) {
+        //console.log(query);
+        //console.log(nearestNeighbor);
+       //console.log(probability);
+        if(probability > 0.4) {
             callback(nearestNeighbor.name);
         } else {
             callback('');
