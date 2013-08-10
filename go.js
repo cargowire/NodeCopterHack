@@ -30,9 +30,7 @@ var pngStream;
 client.after(2000, function () {
     pngStream = client.getPngStream();
     pngStream.on('error', console.log).on('data', function (pngBuffer) {
-        ;
         lastPng = pngBuffer;
-
         var filename = new Date() * 1 + '.png';
         fs.open(filename, "wx", function (err, fd) {
             fs.write(fd, pngBuffer, 0, pngBuffer.length, null, function () {
@@ -76,7 +74,7 @@ var scan = function (filename) {
 app.listen(8076);
 
 var doAction = function (command) {
-
+console.log("COMMAND: " + command);
     var commands = {
         'LAND': function () {
             client.land();
@@ -88,7 +86,7 @@ var doAction = function (command) {
 
     var upper = command.toUpperCase();
     if(typeof commands[upper] == 'function') {
-        commands[upper];
+        commands[upper]();
     }
 
 }
