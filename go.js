@@ -46,21 +46,9 @@ client.after(2000, function () {
     });
 });
 
-/*client
- .after(5000, function() {
- this.clockwise(0.5);
- })
- //.after(3000, function() {
- //  this.animate('flipLeft', 15);
- //})
- .after(1000, function() {
- this.stop();
- this.land();
- });
- */
-
-var takeoff = function() { client.takeoff(); };
-var land = function() { client.land(); };
+var takeoff = function () {
+    client.takeoff();
+};
 
 var scanning = false;
 var scan = function (filename) {
@@ -70,18 +58,40 @@ var scan = function (filename) {
             //nodecr.process(lastPng, function(err, text)
         {
             if(err) {
-            //    console.error(err);
+                //    console.error(err);
             } else {
                 var tidiedUp = text.replace("0", "O").replace(/\W/g, "");
-               // if(tidiedUp == "STOP")
+                // if(tidiedUp == "STOP")
                 //{
-                   console.log(tidiedUp);
-               // }
+                console.log(tidiedUp);
+                doAction(tidiedUp);
+
+                // }
             }
         });
         scanning = false;
     }
 };
 
-app.listen(8080);
+app.listen(8076);
+
+var doAction = function (command) {
+
+    var commands = {
+        'LAND': function () {
+            client.land();
+        },
+        'TAKEOFF': function () {
+            client.takeoff();
+        }
+    }
+
+    var upper = command.toUpperCase();
+    if(typeof commands[upper] == 'function') {
+        commands[upper];
+    }
+
+}
+takeoff();
+
 
