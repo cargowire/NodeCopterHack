@@ -86,6 +86,10 @@ console.log("COMMAND: " + command);
         },
         'TAKEOFF': function () {
             client.takeoff();
+        },
+	'DANCE': function()
+        {
+            client.animateLeds('redSnake', 5, 5);
         }
     }
 
@@ -95,5 +99,5 @@ console.log("COMMAND: " + command);
     }
 
 }
-takeoff();
+//takeoff();
 
