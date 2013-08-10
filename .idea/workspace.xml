@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/go.js" afterPath="$PROJECT_DIR$/go.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NodeCopterHack.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376145571388" ignored="false" />
-    <file path="/go.js" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376145788053" ignored="false" />
+    <file path="/go.js" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376145996690" ignored="false" />
     <file path="/nearest.js" changelist="eeacb93f-73aa-46ec-92c7-08d6fb5d2b5c" time="1376142921730" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +31,7 @@
       <file leaf-file-name="go.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/go.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="22" selection-start="2682" selection-end="2682" vertical-scroll-proportion="0.41379312">
+            <state line="92" column="59" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.34051725">
               <folding />
             </state>
           </provider>
@@ -279,7 +278,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/go.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="22" selection-start="2682" selection-end="2682" vertical-scroll-proportion="0.41379312">
+        <state line="92" column="59" selection-start="2534" selection-end="2534" vertical-scroll-proportion="0.34051725">
           <folding />
         </state>
       </provider>
